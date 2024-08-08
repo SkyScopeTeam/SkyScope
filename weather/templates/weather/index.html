@@ -1,16 +1,66 @@
 <!DOCTYPE html>
 <html lang="en-US">
-
 <head>
     <meta charset="utf-8" />
-    <title>Home</title>
+    <title>SkyScope - Your Weather Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+        }
+        .header, .footer {
+            background-color: #4682b4;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+        .weather-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .weather-card h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .weather-card p {
+            margin: 5px 0;
+            font-size: 18px;
+        }
+    </style>
 </head>
-
 <body>
-    <h1>
-        <a>Home</a>
-    </h1>
-    <p>This is the home page.</p>
+    <div class="header">
+        <h1>SkyScope</h1>
+        <p>Your Privacy-Respecting Weather Dashboard</p>
+    </div>
+    <div class="container">
+        <div class="weather-card">
+            <h2>Current Weather</h2>
+            <p>Location: {{ location }}</p>
+            <p>Temperature: {{ temperature }}°{{ unit }}</p>
+            <p>Condition: {{ condition }}</p>
+        </div>
+        <div class="weather-card">
+            <h2>Forecast</h2>
+            <p>Tomorrow: {{ forecast.tomorrow.temperature }}°{{ unit }}, {{ forecast.tomorrow.condition }}</p>
+            <p>Day After Tomorrow: {{ forecast.day_after_tomorrow.temperature }}°{{ unit }}, {{ forecast.day_after_tomorrow.condition }}</p>
+        </div>
+    </div>
+    <div class="footer">
+        <p>&copy; 2024 SkyScope. All rights reserved.</p>
+    </div>
 </body>
-
 </html>
