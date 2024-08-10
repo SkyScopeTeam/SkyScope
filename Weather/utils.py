@@ -1,11 +1,13 @@
 # weather_app/utils.py
 import requests
+from decouple import config
+
 
 def get_weather(zip_code):
-    api_key = 'kEONyXCCifCwp205RhhJ3XJX3FGFFepB'  #API key
+    api_key = config("TOMORROW_IO_KEY")
     base_url = 'https://api.tomorrow.io/v4/weather/forecast?location=42.3478,-71.0466&apikey=kEONyXCCifCwp205RhhJ3XJX3FGFFepB'
     location_url = f'http://api.zippopotam.us/us/{zip_code}'
-    
+
     location_response = requests.get(location_url)
     if location_response.status_code != 200:
         return None  # Invalid zip code
