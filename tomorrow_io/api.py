@@ -13,4 +13,4 @@ def get_forecast() -> dict:
         f"location={latitude},{longitude}&apikey={TOMORROW_IO_KEY}" +
         "&timesteps=1h&units=imperial"
     )
-    return r.json()
+    return r.json()["timelines"]["hourly"][0]["values"]

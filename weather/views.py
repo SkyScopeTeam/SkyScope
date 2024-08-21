@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 
@@ -12,6 +14,14 @@ from .utils import get_weather
 #        weather_data = get_weather(zip_code)
 #        print(weather_data)  # Print the API response to inspect its structure
 #   return render(request, 'weatherapp/weather.html', {'weather_data': weather_data})
+
+
+def new_view(request):
+    weather = get_forecast()
+    # time mm/dd/yyyy
+    time = datetime.now().strftime("%m/%d/%Y")
+    return render(
+        request, 'weather/new.html', {'weather': weather, 'time': time})
 
 
 def weather_view(request):
