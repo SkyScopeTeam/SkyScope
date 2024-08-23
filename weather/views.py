@@ -1,52 +1,25 @@
-from datetime import datetime
-
-from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 
 from tomorrow_io.api import get_forecast
-
-from .utils import get_weather
-
-# def weather_view(request):
-#    weather_data = None
-#    if request.method == 'POST':
-#        zip_code = request.POST.get('zip_code')
-#        weather_data = get_weather(zip_code)
-#        print(weather_data)  # Print the API response to inspect its structure
-#   return render(request, 'weatherapp/weather.html', {'weather_data': weather_data})
+from zippopotam.api import get_location_info
 
 
-def new_view(request):
-    weather = get_forecast()
-    # time mm/dd/yyyy
-    time = datetime.now().strftime("%m/%d/%Y")
+def home_view(request):
+    if request.method != 'POST':
+        return render(request, 'weather/weather.html')
+
+    zip_code = request.POST.get('zip_code')
+    location_info = get_location_info(zip_code)
+    latitude = location_info["latitude"]
+    longitude = location_info["longitude"]
+    location_info["city"] = location_info["place name"]
+
+    weather = get_forecast(latitude=latitude, longitude=longitude)
     return render(
-        request, 'weather/new.html', {'weather': weather, 'time': time})
-
-
-def weather_view(request):
-    weather_data = None
-    context = {}
-    if request.method == 'POST':
-        zip_code = request.POST.get('zip_code')
-        weather_data = get_weather(zip_code)
-
-        if weather_data and 'data' in weather_data:
-            timelines = weather_data['data']['timelines']
-            if timelines and len(timelines) > 0:
-                intervals = timelines[0]['intervals']
-                if intervals and len(intervals) > 0:
-                    values = intervals[0]['values']
-                    temperature = values.get('temperature')
-                    weather_code = values.get('weatherCode')
-                    context['temperature'] = temperature
-                    context['weather_code'] = weather_code
-                    context['location'] = zip_code
-
-    print(context)  # Print the context to debug
-    return render(request, 'weather/weather.html', context)
-
-
-def home_view(request: HttpRequest) -> HttpResponse:
-    forecast = get_forecast()
-    return render(request, "weather/index.html", {"forecast": forecast})
+        request,
+        'weather/index.html',
+        {
+            'weather': weather,
+            "location": location_info
+        }
+    )

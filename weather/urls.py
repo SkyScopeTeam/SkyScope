@@ -17,11 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from weather.views import home_view, new_view, weather_view
+from weather.views import home_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("weather", home_view, name="home"),
-    path('', weather_view, name='weather'),
-    path("new", new_view, name="new"),
+    path("", home_view, name="home"),
 ]
