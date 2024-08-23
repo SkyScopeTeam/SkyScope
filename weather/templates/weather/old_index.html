@@ -1,9 +1,11 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel = "stylesheet" href = style.css>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
     <meta name = "viewport" content = "width = device-width, initial-scale = 1"
 </head>
 <body>
@@ -12,19 +14,10 @@
         <input type = "text" required/>
         <span class="placeholder"> &#9906; Search Location</span>
     </label>
-    <nav class = "navbar">
-        <a href="index.html">Today</a>
-        <a href="index.html">Day2</a>
-        <a href="index.html">Day3</a>
-        <a href="index.html">Day4</a>
-        <a href="index.html">Day5</a>
-        <a href="index.html">Day6</a>
-        <a href="index.html">Day7</a>
-    </nav>
     <h2>City Name</h2>
     <h3>Current Date</h3>
     <div class = "content">
-        <div class = "daytemp">Temperature <hr></div>
+        <div class = "daytemp">Temperature <hr>{{ weather.temperature }}°F</div>
         <div class = "humidity">Humidity<hr></div>
         <div class = "wind">Wind<hr></div>
         <div class = "uvindex">UV Index<hr></div>
