@@ -1,47 +1,28 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel = "stylesheet" href = style.css>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
     <meta name = "viewport" content = "width = device-width, initial-scale = 1"
 </head>
 <body>
     <h1>SkyScope</h1>
-    <h2>{{ location.city }}, {{ location.state }} Weather</h2>
-    <table>
-        <tr>
-          <td>Temperature</td>
-          <td>{{ weather.temperature }}°F</td>
-        </tr>
-        <tr>
-          <td>Apparent Temperature</td>
-          <td>{{ weather.temperatureApparent }}°F</td>
-        </tr>
-        <tr>
-          <td>Humidity</td>
-          <td>{{ weather.humidity }}%</td>
-        </tr>
-        <tr>
-          <td>UV Index</td>
-          <td>{{ weather.uvIndex }}</td>
-        </tr>
-        <tr>
-          <td>Wind Speed / Gust</td>
-          <td>{{ weather.windSpeed }}mph / {{ weather.windGust }}mph</td>
-        </tr>
-        <tr>
-          <td>Wind Direction</td>
-          <td>{{ weather.windDirection }}°</td>
-        </tr>
-        <tr>
-          <td>Visibility</td>
-          <td>{{ weather.visibility }}mi</td>
-        </tr>
-        <tr>
-          <td>Air Pressure</td>
-          <td>{{ weather.pressureSurfaceLevel }} inHg</td>
-        </tr>
-    </table>
+    <label class = "locsearch">
+        <input type = "text" required/>
+        <span class="placeholder"> &#9906; Search Location</span>
+    </label>
+    <h2>{{ location.city }}, {{ location.state }}</h2>
+    <h3>Current Date</h3>
+    <div class = "content">
+        <div class = "daytemp">Temperature <hr>{{ weather.temperature }}°F</div>
+        <div class = "humidity">Humidity<hr>{{ weather.humidity }}%</div>
+        <div class = "wind">UV Index<hr>{{ weather.uvIndex }}</div>
+        <div class = "uvindex">Wind Speed / Gust<hr>{{ weather.windSpeed }}mph / {{ weather.windGust }}mph</div>
+        <div class = "airquality">Wind Direction<hr>{{ weather.windDirection }}°</div>
+        <div class = "map">Radar Map<hr></div>
+    </div>
 </body>
 </html>
