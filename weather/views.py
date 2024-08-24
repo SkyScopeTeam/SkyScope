@@ -6,7 +6,7 @@ from zippopotam.api import get_location_info
 
 def home_view(request):
     if request.method != 'POST':
-        return render(request, 'weather/weather.html')
+        return render(request, 'weather/first_page.html')
 
     zip_code = request.POST.get('zip_code')
     location_info = get_location_info(zip_code)
